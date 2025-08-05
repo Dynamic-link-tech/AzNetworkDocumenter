@@ -1,4 +1,4 @@
-# Azure Network Discovery Script
+# Azure Network Documenter
 
 A comprehensive PowerShell script for discovering, documenting, and visualizing Azure network resources across subscriptions. This tool generates detailed reports, interactive topology maps, and structured JSON data exports for all your Azure networking components.
 
@@ -54,42 +54,42 @@ A comprehensive PowerShell script for discovering, documenting, and visualizing 
 
 ```powershell
 # Run with default settings (discovers all subscriptions)
-.\AzureNetworkDiscovery.ps1
+.\AzNetworkDocumenter.ps1
 
 # Specify custom output directory
-.\AzureNetworkDiscovery.ps1 -OutputPath "C:\NetworkAudit"
+.\AzNetworkDocumenter.ps1 -OutputPath "C:\NetworkAudit"
 
 # Filter specific subscriptions
-.\AzureNetworkDiscovery.ps1 -SubscriptionFilter @("Subscription1", "Subscription2")
+.\AzNetworkDocumenter.ps1 -SubscriptionFilter @("Subscription1", "Subscription2")
 
 # Filter specific resource groups
-.\AzureNetworkDiscovery.ps1 -ResourceGroupFilter @("RG1", "RG2")
+.\AzNetworkDocumenter.ps1 -ResourceGroupFilter @("RG1", "RG2")
 ```
 
 ### Advanced Options
 
 ```powershell
 # Skip topology generation
-.\AzureNetworkDiscovery.ps1 -GenerateTopology:$false
+.\AzNetworkDocumenter.ps1 -GenerateTopology:$false
 
 # Skip HTML report generation
-.\AzureNetworkDiscovery.ps1 -GenerateHTMLReport:$false
+.\AzNetworkDocumenter.ps1 -GenerateHTMLReport:$false
 
 # Exclude VMs from discovery (faster for large environments)
-.\AzureNetworkDiscovery.ps1 -OnlyCoreNetwork
+.\AzNetworkDocumenter.ps1 -OnlyCoreNetwork
 
 # Sanitize resource names in diagrams
-.\AzureNetworkDiscovery.ps1 -Sanitize -Prefix "PROD_"
+.\AzNetworkDocumenter.ps1 -Sanitize -Prefix "PROD_"
 
 # Specify diagram output formats
-.\AzureNetworkDiscovery.ps1 -DiagramFormats @("PNG", "SVG", "PDF")
+.\AzNetworkDocumenter.ps1 -DiagramFormats @("PNG", "SVG", "PDF")
 ```
 
 ## Parameters
 
 | Parameter | Type | Default | Description |
 |-----------|------|---------|-------------|
-| `-OutputPath` | String | `.\AzureNetworkDiscovery` | Output directory for all files |
+| `-OutputPath` | String | `.\AzNetworkDocumenter` | Output directory for all files |
 | `-GenerateTopology` | Switch | `$true` | Generate network topology diagrams |
 | `-GenerateHTMLReport` | Switch | `$true` | Generate HTML report |
 | `-SubscriptionFilter` | String[] | All subscriptions | Filter specific subscriptions |
@@ -125,7 +125,7 @@ The script discovers and documents the following Azure resources:
 ## Output Structure
 
 ```
-.\AzureNetworkDiscovery\
+.\AzNetworkDocumenter\
 ├── JSON\                           # Individual JSON files for each resource type
 │   ├── VirtualNetworks_[timestamp].json
 │   ├── Subnets_[timestamp].json
@@ -228,22 +228,22 @@ Detailed logs are saved to: `[OutputPath]\NetworkDiscovery_[date].log`
 
 ### Example 1: Full Discovery with Custom Path
 ```powershell
-.\AzureNetworkDiscovery.ps1 -OutputPath "D:\AzureAudit\Network" -DiagramFormats @("PNG", "SVG")
+.\AzNetworkDocumenter.ps1 -OutputPath "D:\AzureAudit\Network" -DiagramFormats @("PNG", "SVG")
 ```
 
 ### Example 2: Production Environment Only
 ```powershell
-.\AzureNetworkDiscovery.ps1 -SubscriptionFilter @("Production") -ResourceGroupFilter @("PROD-*")
+.\AzNetworkDocumenter.ps1 -SubscriptionFilter @("Production") -ResourceGroupFilter @("PROD-*")
 ```
 
 ### Example 3: Quick Core Network Overview
 ```powershell
-.\AzureNetworkDiscovery.ps1 -OnlyCoreNetwork -GenerateHTMLReport:$false
+.\AzNetworkDocumenter.ps1 -OnlyCoreNetwork -GenerateHTMLReport:$false
 ```
 
 ### Example 4: Sanitized Output for Documentation
 ```powershell
-.\AzureNetworkDiscovery.ps1 -Sanitize -Prefix "CORP_" -DiagramFormats @("SVG")
+.\AzNetworkDocumenter.ps1 -Sanitize -Prefix "CORP_" -DiagramFormats @("SVG")
 ```
 
 ## License
